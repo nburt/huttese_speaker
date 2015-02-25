@@ -17,22 +17,33 @@
     <td id="huttese-phrase"><%= @phrase_repository.huttese_phrase %></td>
     <td><a href="#" id="speak-huttese-phrase">Say it</a></td>
   </tr>
+  <tr>
+    <td><%= image_tag("star-wars-han-solo-harrison-ford.jpg", id: "hans-solo", style: "max-width: 100%;") %></td>
+    <td></td>
+    <td><%= image_tag("jabba-tongue.jpg", id: "jabba", style: "max-width: 100%;") %></td>
+    <td></td>
+  </tr>
   </tbody>
 </table>
 
 <script type="text/javascript">
   $(document).ready(function () {
+    $("#hans-solo").hide();
     var msg = new SpeechSynthesisUtterance('<%= @phrase_repository.huttese_phrase %>');
     window.speechSynthesis.speak(msg);
 
     $("#speak-english-phrase").on("click", function (event) {
       event.preventDefault();
+      $("#jabba").hide();
+      $("#hans-solo").show();
       var englishMsg = new SpeechSynthesisUtterance($("#english-phrase").html().replace(/&nbsp;/gi,''));
       window.speechSynthesis.speak(englishMsg);
     });
 
     $("#speak-huttese-phrase").on("click", function (event) {
       event.preventDefault();
+      $("#hans-solo").hide();
+      $("#jabba").show();
       var englishMsg = new SpeechSynthesisUtterance($("#huttese-phrase").html().replace(/&nbsp;/gi,''));
       window.speechSynthesis.speak(englishMsg);
     });
