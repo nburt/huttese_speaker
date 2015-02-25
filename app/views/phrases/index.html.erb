@@ -1,4 +1,7 @@
-<table class="table" style="margin-top: 10em;">
+<div style="margin-top: 10em;">
+  <a href="#" id="new-phrase">Load New Phrase</a>
+</div>
+<table class="table">
   <thead>
   <tr>
     <th width="45%">English</th>
@@ -23,15 +26,20 @@
     window.speechSynthesis.speak(msg);
 
     $("#speak-english-phrase").on("click", function (event) {
-      event.preventDefault()
+      event.preventDefault();
       var englishMsg = new SpeechSynthesisUtterance($("#english-phrase").html().replace(/&nbsp;/gi,''));
       window.speechSynthesis.speak(englishMsg);
     });
 
     $("#speak-huttese-phrase").on("click", function (event) {
-      event.preventDefault()
+      event.preventDefault();
       var englishMsg = new SpeechSynthesisUtterance($("#huttese-phrase").html().replace(/&nbsp;/gi,''));
       window.speechSynthesis.speak(englishMsg);
+    });
+
+    $("#new-phrase").on("click", function (event) {
+      event.preventDefault();
+      location.reload();
     });
   });
 </script>
