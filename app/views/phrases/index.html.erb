@@ -1,0 +1,37 @@
+<table class="table" style="margin-top: 10em;">
+  <thead>
+  <tr>
+    <th width="45%">English</th>
+    <th width="5%"></th>
+    <th width="45%">Huttese</th>
+    <th width="5%"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td id="english-phrase"><%= @phrase_repository.english_phrase %></td>
+    <td><a href="#" id="speak-english-phrase">Say it</a></td>
+    <td id="huttese-phrase"><%= @phrase_repository.huttese_phrase %></td>
+    <td><a href="#" id="speak-huttese-phrase">Say it</a></td>
+  </tr>
+  </tbody>
+</table>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    var msg = new SpeechSynthesisUtterance('<%= @phrase_repository.huttese_phrase %>');
+    window.speechSynthesis.speak(msg);
+
+    $("#speak-english-phrase").on("click", function (event) {
+      event.preventDefault()
+      var englishMsg = new SpeechSynthesisUtterance($("#english-phrase").html().replace(/&nbsp;/gi,''));
+      window.speechSynthesis.speak(englishMsg);
+    });
+
+    $("#speak-huttese-phrase").on("click", function (event) {
+      event.preventDefault()
+      var englishMsg = new SpeechSynthesisUtterance($("#huttese-phrase").html().replace(/&nbsp;/gi,''));
+      window.speechSynthesis.speak(englishMsg);
+    });
+  });
+</script>

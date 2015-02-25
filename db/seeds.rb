@@ -1,7 +1,8 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'csv'
+
+csv = CSV.read('./db/seed_data.csv')
+csv.shift
+
+csv.each do |row|
+  PhraseRepository.create!(english_phrase: row[0].gsub("&nbsp;", ""), huttese_phrase: row[1].gsub("&nbsp;", ""))
+end
